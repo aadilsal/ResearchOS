@@ -12,8 +12,17 @@ export default defineSchema({
   tenants: defineTable({
     name: v.string(),
     plan: v.union(v.literal("free"), v.literal("pro"), v.literal("enterprise")),
-    ownerId: v.string(), // Clerk user ID or Convex user ID? Usually Convex user ID.
+    ownerId: v.string(),
+    credits: v.number(), // Added for credit tracking
   }),
+
+  usageLogs: defineTable({
+    tenantId: v.id("tenants"),
+    projectId: v.id("projects"),
+    type: v.union(v.literal("research_start"), v.literal("extra_search"), v.literal("premium_analysis")),
+    amount: v.number(),
+    timestamp: v.number(),
+  }).index("by_tenant", ["tenantId"]),
 
   tenantMembers: defineTable({
     userId: v.id("users"),
@@ -30,11 +39,16 @@ export default defineSchema({
       v.literal("idle"),
       v.literal("planning"),
       v.literal("researching"),
+      v.literal("reading"),
       v.literal("analyzing"),
       v.literal("completed"),
       v.literal("failed")
     ),
     objective: v.string(),
+    error: v.optional(v.string()),
+    citationStyle: v.optional(v.union(v.literal("APA"), v.literal("MLA"), v.literal("Chicago"), v.literal("IEEE"), v.literal("Harvard"))),
+    citationCount: v.optional(v.number()),
+    researchDepth: v.optional(v.union(v.literal("brief"), v.literal("standard"), v.literal("comprehensive"))),
   }).index("by_tenant", ["tenantId"]),
 
   tasks: defineTable({

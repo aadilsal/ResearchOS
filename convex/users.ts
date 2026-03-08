@@ -1,4 +1,4 @@
-import { mutation, query, queryWithAuth } from "convex/server";
+import { mutation, query } from "./_generated/server";
 import { v } from "convex/values";
 
 /**
@@ -40,6 +40,7 @@ export const store = mutation({
       name: `${args.name || 'My'} Workspace`,
       plan: "free",
       ownerId: args.tokenIdentifier,
+      credits: 100, // Starting credits
     });
 
     // Add user as owner of the tenant
@@ -77,5 +78,27 @@ export const me = query({
       ...user,
       tenants: tenants.filter((t) => !!t),
     };
+  },
+});
+export const verifyAccess = query({
+  args: { 
+    tokenIdentifier: v.string(),
+    tenantId: v.id("tenants"),
+  },
+  handler: async (ctx, args) => {
+    const user = await ctx.db
+      .query("users")
+      .withIndex("by_token", (q) => q.eq("tokenIdentifier", args.tokenIdentifier))
+      .unique();
+
+    if (!user) return false;
+
+    const membership = await ctx.db
+      .query("tenantMembers")
+      .withIndex("by_tenant", (q) => q.eq("tenantId", args.tenantId))
+      .filter((q) => q.eq(q.field("userId"), user._id))
+      .unique();
+
+    return !!membership;
   },
 });

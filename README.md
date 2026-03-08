@@ -1,36 +1,48 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# ResearchOS 🚀
+**Autonomous AI research at your fingertips.**
 
-## Getting Started
+ResearchOS is a high-performance, multi-tenant SaaS platform that leverages autonomous AI agents to transform core-competency research into a streamlined, automated experience. Built with **Next.js 14**, **Convex**, and **LangGraph**, it transforms complex objectives into professional intelligence reports in minutes.
 
-First, run the development server:
+---
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## ✨ Key Features
+- **🤖 Autonomous Agent Cluster**: 
+    - **Planner**: Dynamically breaks down objectives.
+    - **Searcher**: Multi-source web navigation via Tavily.
+    - **Reader**: Facts extraction and factual synthesis.
+    - **Analyzer**: Generates boardroom-ready reports.
+- **💎 Premium UI/UX**: Ultra-fast, glassmorphic dashboard with real-time agent tracking.
+- **🛡️ Multi-tenant Security**: Robust data isolation and secure authentication via Clerk.
+- **⚡ Real-time Feedback**: Live progress visualization and terminal output for every research job.
+- **💰 Resource Monitoring**: Integrated credit system and usage analytics.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 📂 Documentation
+For detailed information on how to build, deploy, and manage ResearchOS, please refer to the following guides:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- **[Technical Blueprint](./documents/blueprint.md)**: Deep dive into the architecture, schema, and AI orchestration logic.
+- **[Local Setup & Run Guide](./documents/setup.md)**: Step-by-step instructions to get the project running locally.
+- **[Vercel Deployment Guide](./documents/deployment.md)**: How to push ResearchOS to production on Vercel and Convex.
 
-## Learn More
+---
 
-To learn more about Next.js, take a look at the following resources:
+## 🛠️ Technology Stack
+- **Framework**: Next.js 14 (App Router)
+- **Backend**: Convex Real-time Database
+- **AI Orchestration**: LangGraph (LangChain)
+- **LLM**: Groq (Llama-3-70b)
+- **Search Engine**: Tavily API
+- **Authentication**: Clerk
+- **UI Components**: shadcn/ui + Tailwind CSS
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+---
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 🏁 Getting Started
+Quick start for local development:
+1. `npm install`
+2. `npx convex dev` (Setup your Convex project)
+3. Set up your `.env.local` with Clerk, Groq, and Tavily keys.
+4. `npm run dev`
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Visit [Local Setup Guide](./documents/setup.md) for full details.
